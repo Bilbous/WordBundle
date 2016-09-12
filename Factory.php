@@ -45,7 +45,7 @@ class Factory
      *
      * @return \PHPWord_Writer_IWriter
      */
-    public function createWriter(\PHPWord $phpWordObject, $type = 'Word5')
+    public function createWriter(\PHPWord $phpWordObject, $type = 'Word2007')
     {
         return call_user_func(array($this->phpWordIO, 'createWriter'), $phpWordObject, $type);
     }
