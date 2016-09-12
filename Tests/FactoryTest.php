@@ -9,12 +9,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreate()
     {
         $factory =  new Factory();
-        $this->assertInstanceOf('\PHPWord', $factory->createPHPWordObject());
+        $this->assertInstanceOf('\PhpOffice\PhpWord\PHPWord', $factory->createPHPWordObject());
     }
 
     public function testCreateStreamedResponse()
     {
-        $writer = $this->getMock('\PHPWord_Writer_IWriter');
+        $writer = $this->getMock('\PhpOffice\PhpWord\Writer\Word2007');
         $writer->expects($this->once())
             ->method('save')
             ->with('php://output');

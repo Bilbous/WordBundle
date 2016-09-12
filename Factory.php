@@ -13,7 +13,7 @@ class Factory
 {
     private $phpWordIO;
 
-    public function __construct($phpWordIO = '\PHPWord_IOFactory')
+    public function __construct($phpWordIO = '\PhpOffice\PhpWord\IOFactory')
     {
         $this->phpWordIO = $phpWordIO;
     }
@@ -22,12 +22,12 @@ class Factory
      *
      * @param string $filename
      *
-     * @return \PHPWord
+     * @return \PhpOffice\PhpWord\PHPWord
      */
     public function createPHPWordObject($filename =  null)
     {
         if (null == $filename) {
-            $phpWordObject = new \PHPWord();
+            $phpWordObject = new \PhpOffice\PhpWord\PhpWord();
 
             return $phpWordObject;
         }
@@ -37,15 +37,15 @@ class Factory
 
     /**
      * Create a writer given the PHPWordObject and the type,
-     *   the type coul be one of PHPWord_IOFactory::$_autoResolveClasses
+     *   the type coul be one of IOFactory::$_autoResolveClasses
      *
-     * @param \PHPWord $phpWordObject
+     * @param \PhpOffice\PhpWord\PHPWord $phpWordObject
      * @param string    $type
      *
      *
-     * @return \PHPWord_Writer_IWriter
+     * @return \PhpOffice\PhpWord\Writer\WriterInterface
      */
-    public function createWriter(\PHPWord $phpWordObject, $type = 'Word2007')
+    public function createWriter(\PhpOffice\PhpWord\PhpWord $phpWordObject, $type = 'Word2007')
     {
         return call_user_func(array($this->phpWordIO, 'createWriter'), $phpWordObject, $type);
     }
@@ -53,13 +53,13 @@ class Factory
     /**
      * Stream the file as Response.
      *
-     * @param \PHPWord_Writer_IWriter $writer
+     * @param \PhpOffice\PhpWord\Writer\WriterInterface $writer
      * @param int                      $status
      * @param array                    $headers
      *
      * @return StreamedResponse
      */
-    public function createStreamedResponse(\PHPWord_Writer_IWriter $writer, $status = 200, $headers = array())
+    public function createStreamedResponse(\PhpOffice\PhpWord\Writer\WriterInterface $writer, $status = 200, $headers = array())
     {
         return new StreamedResponse(
             function () use ($writer) {
