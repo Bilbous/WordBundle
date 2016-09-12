@@ -25,7 +25,7 @@ Old Symfony
 **1**  Add to composer.json to the `require` key
 
 ``` shell
-    $composer require liuggio/excelbundle
+    $composer require bilbous/wordbundle
 ``` 
 
 **2** Register the bundle in ``app/AppKernel.php``
