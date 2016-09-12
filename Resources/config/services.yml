@@ -1,0 +1,6 @@
+parameters:
+    phpword.class:  Bilbous\WordBundle\Factory
+
+services:
+    phpword:
+      class: %phpword.class%
