@@ -13,11 +13,10 @@ class Factory
 {
     private $phpWordIO;
 
-    public function __construct($phpWordIO = '\PHPWord_IOFactory')
+    public function __construct($phpWordIO = '\PhpOffice\PhpWord\IOFactory')
     {
         $this->phpWordIO = $phpWordIO;
     }
-
     /**
      * Creates an empty PHPWord Object if the filename is empty, otherwise loads the file into the object.
      *
@@ -27,12 +26,18 @@ class Factory
      */
     public function createPHPWordObject($filename =  null)
     {
-        return (null === $filename) ? new \PHPWord() : call_user_func(array($this->phpWordIO, 'load'), $filename);
+        if (null == $filename) {
+            $phpWordObject = new \PhpOffice\PhpWord\PhpWord();
+
+            return $phpWordObject;
+        }
+
+        return call_user_func(array($this->phpWordIO, 'load'), $filename);
     }
 
     /**
      * Create a writer given the PHPWordObject and the type,
-     *   the type coul be one of PHPWord_IOFactory::$_autoResolveClasses
+     *   the type coul be one of IOFactory::$_autoResolveClasses
      *
      * @param \PHPWord $phpWordObject
      * @param string    $type
@@ -40,7 +45,7 @@ class Factory
      *
      * @return \PHPWord_Writer_IWriter
      */
-    public function createWriter(\PHPWord $phpWordObject, $type = 'Word2007')
+    public function createWriter(\PhpOffice\PhpWord\PhpWord $phpWordObject, $type = 'Word2007')
     {
         return call_user_func(array($this->phpWordIO, 'createWriter'), $phpWordObject, $type);
     }
@@ -54,7 +59,7 @@ class Factory
      *
      * @return StreamedResponse
      */
-    public function createStreamedResponse(\PHPWord_Writer_IWriter $writer, $status = 200, $headers = array())
+    public function createStreamedResponse(\PhpOffice\PhpWord\Writer\WriterInterface $writer, $status = 200, $headers = array())
     {
         return new StreamedResponse(
             function () use ($writer) {
