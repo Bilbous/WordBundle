@@ -12,15 +12,20 @@ This bundle permits you to create, modify and read word objects.
 
 [![License](https://poser.pugx.org/Bilbous/WordBundle/license.png)](LICENSE)
 
+## Version 2
+
+New Symfony
+
+### Version 1.*
+
+Old Symfony
 
 ## Installation
 
 **1**  Add to composer.json to the `require` key
 
-``` yml
-    "require" : {
-        "Bilbous/wordbundle": "~1.0",
-    }
+``` shell
+    $composer require liuggio/excelbundle
 ``` 
 
 **2** Register the bundle in ``app/AppKernel.php``

@@ -17,6 +17,7 @@ class Factory
     {
         $this->phpWordIO = $phpWordIO;
     }
+
     /**
      * Creates an empty PHPWord Object if the filename is empty, otherwise loads the file into the object.
      *
@@ -26,13 +27,7 @@ class Factory
      */
     public function createPHPWordObject($filename =  null)
     {
-        if (null == $filename) {
-            $phpWordObject = new \PHPWord();
-
-            return $phpWordObject;
-        }
-
-        return call_user_func(array($this->phpWordIO, 'load'), $filename);
+        return (null === $filename) ? new \PHPWord() : call_user_func(array($this->phpWordIO, 'load'), $filename);
     }
 
     /**
@@ -45,7 +40,7 @@ class Factory
      *
      * @return \PHPWord_Writer_IWriter
      */
-    public function createWriter(\PHPWord $phpWordObject, $type = 'Word5')
+    public function createWriter(\PHPWord $phpWordObject, $type = 'Word2007')
     {
         return call_user_func(array($this->phpWordIO, 'createWriter'), $phpWordObject, $type);
     }
